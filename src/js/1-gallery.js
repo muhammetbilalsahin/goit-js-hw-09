@@ -1,6 +1,4 @@
-// Kullanılacak kısmın import edilmesi
 import SimpleLightbox from 'simplelightbox';
-// Ek stillerin eklenmesi
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const images = [
@@ -69,30 +67,22 @@ const images = [
   },
 ];
 
-const galleryContainer = document.querySelector('.gallery');
+const galleryList = document.querySelector('.gallery');
 
-// Galeri içeriğini oluşturuyoruz
-const galleryMarkup = images
-  .map(({ preview, original, description }) => {
-    return `
-      <li class="gallery-item">
-        <a class="gallery-link" href="${original}">
-          <img 
-            class="gallery-image" 
-            src="${preview}" 
-            alt="${description}" 
-          />
-        </a>
-      </li>
-    `;
-  })
+const markup = images
+  .map(
+    ({ preview, original, description }) => `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${original}">
+        <img class="gallery-image" src="${preview}" alt="${description}" />
+      </a>
+    </li>`
+  )
   .join('');
 
-// Oluşturulan HTML'i sayfaya ekliyoruz
-galleryContainer.innerHTML = galleryMarkup;
+galleryList.innerHTML = markup;
 
-// SimpleLightbox'u başlatıyoruz
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt', // Açıklamayı alt özelliğinden al
-  captionDelay: 250, // Açıklamayı 250ms sonra göster
+new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
 });
